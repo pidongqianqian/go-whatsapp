@@ -208,6 +208,7 @@ Loop:
 	session.ClientToken = info.ClientToken
 	session.ServerToken = info.ServerToken
 	session.Wid = info.WID
+	wac.PushName = info.PushName
 	decodedSecret, err := base64.StdEncoding.DecodeString(info.Secret)
 	if err != nil {
 		return session, "", fmt.Errorf("error decoding secret: %w", err)

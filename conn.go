@@ -82,6 +82,7 @@ type Conn struct {
 	connected   bool
 	adminInited bool
 	loggedIn    bool
+	PushName    string
 
 	session        *Session
 	sessionLock    uint32
@@ -207,6 +208,7 @@ func (wac *Conn) connect() (err error) {
 	go wac.keepAlive(ws, 21000, 30000)
 
 	wac.loggedIn = false
+	wac.PushName = ""
 	wac.adminInited = false
 	wac.log.Debugln("Successfully connected to websocket")
 	return nil
@@ -219,6 +221,7 @@ func (wac *Conn) Disconnect() error {
 	wac.log.Debugfln("Disconnecting websocket")
 	wac.connected = false
 	wac.loggedIn = false
+	wac.PushName = ""
 	wac.adminInited = false
 
 	ws := wac.ws
