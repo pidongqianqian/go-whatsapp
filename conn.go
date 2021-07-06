@@ -224,6 +224,11 @@ func (wac *Conn) Disconnect() error {
 	wac.PushName = ""
 	wac.adminInited = false
 
+	if wac.ws == nil {
+		wac.log.Debugfln("Websocket isn't connected or disconnected already")
+		return nil
+	}
+
 	ws := wac.ws
 
 	ws.cancel()
